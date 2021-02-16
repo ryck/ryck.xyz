@@ -1,16 +1,16 @@
-import Unsplash, { toJson } from 'unsplash-js';
-
-let unsplash;
-
 export default async (_, res) => {
-  if (!unsplash) {
-    unsplash = new Unsplash({
-      accessKey: process.env.UNSPLASH_ACCESS_KEY
-    });
-  }
+  const response = await fetch(
+    'https://api.unsplash.com/users/ryck/statistics',
+    {
+      headers: {
+        Authorization: `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      method: 'GET'
+    }
+  );
 
-  const userStats = await unsplash.users.statistics('ryck');
-  const { downloads, views } = await toJson(userStats);
+  const { downloads, views } = await response.json();
 
   res.setHeader(
     'Cache-Control',
