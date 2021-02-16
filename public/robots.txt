@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://ryck.xyz/sitemap.xml

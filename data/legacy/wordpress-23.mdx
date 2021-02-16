@@ -1,0 +1,27 @@
+---
+title: "Wordpress 2.3"
+publishedAt: "2007-09-25"
+categories: 
+  - "wordpress"
+  - "legacy"
+tags: 
+  - "actualizacion"
+  - "problemas"
+  - "wordpress"
+---
+
+Argh!!!
+
+Se ve que tenía la BBDD de datos echa un asco, porque al actualizarme al WP 2.3 me ha petado por todos los sitios :((
+
+Resulta que el script de actualizacuión del Wordpress no me estaba creando las 3 tablas relacionadas con las etiquetas (wp\_terms, wp\_term\_taxonomy y wp\_term\_relationships), así que para arreglar el desaguisado, tuve que crearlas yo a pelo...
+
+Después, por si era poco, tuve problemas con la codificación, pues los acentos et al se veian mal... En este caso lo solucione pasando la BBDD a UTF-8 y usando el wp-config.php del WP 2.3, que tiene un par de opciones que controlan el charset y el collate:
+
+`define('DB_CHARSET', 'utf8'); define('DB_COLLATE', '');`
+
+Gracias a $DEITY y al WP Database Backup la cosa solo ha quedado en la perdida de unos cuantos comentarios, y la mayoria mios, así que la cosa pudo haber sido mucho peor... no ha pasado nada ;)
+
+Espero que no vuelva a tener problemas con la base de datos...
+
+PD: Por lo menos, el tema si que es compatible con el WP 2.3 XD

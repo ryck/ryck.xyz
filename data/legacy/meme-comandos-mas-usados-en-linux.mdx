@@ -1,0 +1,32 @@
+---
+title: "Meme: Comandos más usados en Linux"
+publishedAt: "2007-05-24"
+categories: 
+  - "memes"
+  - "legacy"
+---
+
+[markdbd](http://www.markdbd.com/) me pasa el meme de los 10 comandos de Linux que más usamos.
+
+Esto se consigue tecleando lo siguiente en una terminal:
+
+`history|awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}'|sort|uniq -c|sort -rn|head -10`
+
+A mi me sale esto en mi portátil:
+
+> 113 sudo 37 ls 34 cd 18 gpg 5 fg 5 apt-get 5 apache2ctl 5 a2enmod 4 apt-cache 4 a2dismod
+
+**Actualización** Esto es lo que sale en el servidor web del curro:
+
+> 395 ls 207 cd 40 faxstat 35 exit 25 joe 20 rm 16 vi 16 mv 14 service 14 faxmodem
+
+En mi defensa diré que acabo de ponerme la Feisty Fawn ;-)
+
+De todos modos, cada día uso más la Ubuntu y menos el Windows en mi portátil, y eso significa que Linux esta ya preparado para conquistar el escritorio :-)
+
+El MeMe se lo paso (a ver que ponen XD) a:
+
+- [HNK](http://www.hnkweb.com/)
+- [Muxicas](http://www.muxicas.com/)
+- [abertaMENTE](http://abertamente.blogspot.com/)
+- y a todo el que le haga gracia :-)

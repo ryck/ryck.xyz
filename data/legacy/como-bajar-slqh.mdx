@@ -1,0 +1,44 @@
+---
+title: "Como bajar SLQH"
+publishedAt: "2009-01-15"
+categories: 
+  - "tv"
+  - "legacy"
+tags: 
+  - "iphone"
+  - "ipod-touch"
+  - "lasexta"
+  - "slqh"
+---
+
+**Actualización:** Todo esto ya no es válido, poco después implementaron el servicio de streaming con otro protocolo diferente y el método aquí explicado se fuel al garete.
+
+Últimamente veo muy poco la televisión, solo algunos programas de laSexta (sobre todo SLQH y algo de BNF antes de quedar frito en cama). El caso es que Se Lo Que Hicisteis me viene muy mal de horaria para verlo (porque aunque lo pueda ver por Zattoo no es muy compatible con el trabajo, que digamos....) Asi que, aprovechando su estupenda plataforma online , [miSexta.tv](http://www.miSexta.tv), resulta que puedes bajarte todos los programas de la cadena en formato MP4, de una calidad más que aceptable y de bonus totalmente compatible con nuestros iPhone/iPod Touch.
+
+Me voy a centrar en SLQH, que es lo que bajo yo.
+
+Técnicamente hablando, para descubrir la ruta para bajarnos los ficheros solo hay que ver a donde hace las peticiones el player de flash de su web (con el firebug, por ejemplo)
+
+En la práctica, todos los programas de SLQH (los demás programas tienen otra ruta) siguen este esquema de URL:
+
+`http://dnl.interoute.com/%7Beaf7a24f-6a00-4707-8d5c-56f38f6cb4f1%7D/%7B9bd7cb2d-9140-4ede-86c6-64ab7769252a%7D/SLQH_**DD**_**MM**_**AA**_**P**_qtp.mp4`
+
+Donde **DD**, **MM**, **AA** es el día, mes y año respectivamente (con dos dígitos) y **P** es la parte del programa, que va de 01 a 04.
+
+Poniéndonos chulos, la cosa quedaría así:
+
+`http://dnl.interoute.com/%7Beaf7a24f-6a00-4707-8d5c-56f38f6cb4f1%7D/%7B9bd7cb2d-9140-4ede-86c6-64ab7769252a%7D/SLQH_**[01-31]**_**[01-12]**_**[00-99]**_**[01-04]**_qtp.mp4`
+
+Por ejemplo, la primera parte del programa de ayer (13-01-09) sería algo así:
+
+[http://dnl.interoute.com/%7Beaf7a24f-6a00-4707-8d5c-56f38f6cb4f1%7D/%7B9bd7cb2d-9140-4ede-86c6-64ab7769252a%7D/SLQH\_13\_01\_09\_01\_qtp.mp4](http://dnl.interoute.com/%7Beaf7a24f-6a00-4707-8d5c-56f38f6cb4f1%7D/%7B9bd7cb2d-9140-4ede-86c6-64ab7769252a%7D/SLQH_13_01_09_01_qtp.mp4)
+
+El tamaño depende de la parte (la 1ª siempre ocupa muy poquito porque es la presentación) pero contar que un programa completo (las 4 partes, vamos) viene _pesando_ 900MB~1GB
+
+Actualización
+
+Gracias a [VictorPimentel](http://www.twitter.com/VictorPimentel), que me lo chivó, aquí está un feed para el iTunes:
+
+[itpc://www.ytpodcaster.com/feed2.php?id=slqhonline&type=itunes&hd=0&start-index=1&max-results=20](itpc://www.ytpodcaster.com/feed2.php?id=slqhonline&type=itunes&hd=0&start-index=1&max-results=20)
+
+La calidad es menor y los programas están divididos en muchas más partes (9) pero igual le resulta útil a alguien...

@@ -1,0 +1,17 @@
+---
+title: "WordPress 1.5"
+publishedAt: "2005-02-15"
+categories: 
+  - "internet"
+  - "legacy"
+---
+
+Como podeis ver, acabo de actualizar el blog a la nueva versión del WP. Asi a simple vista, que todavia no tengo tiempo para jugar con el, parece mas maduro y elaborado. Ahora es cuestión de aprender como van los temas, personalizar un poco todo y listo. A ver si luego me puedo poner con ello. Ya estan arregladas las dos cosillas estas, a saber:
+
+Para utilizar el [bbclone](http://www.bbclone.de) con esta versión del WP teneis que usar el .htaccess. Hay que poner lo siguiente:
+
+`php_value auto_append_file "/www/public_html/wp-bbclone.php"`
+
+modificando la ruta adaptandola a vuestro blog, evidentemente, y luego crear un archivo llamado wp-bbclone.php que tenga lo siguiente: `define("_BBCLONE_DIR", "www/public_html/bbclone/"); define("COUNTER", _BBCLONE_DIR."mark_page.php"); if (is_readable(COUNTER)) include_once(COUNTER);` volviendo a adaptar la ruta, por supuesto.
+
+En cuanto al fallo de la pagina de administración, como bien dice [Zootropo](http://zootropo.f2o.org/archivos/2005/02/15/wordpress-15/trackback/), se soluciona borrando **todos** los ficheros (sin dejar ninguno), volviendo a subir todo y actualizando la página a lo bestia (ctrl+f5).

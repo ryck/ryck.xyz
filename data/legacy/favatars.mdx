@@ -1,0 +1,9 @@
+---
+title: "Favatars"
+publishedAt: "2005-03-20"
+categories: 
+  - "blogworks"
+  - "legacy"
+---
+
+Acabo de implementar en el blog los [favatars](http://dev.wp-plugins.org/wiki/favatars). Los favatars son como los [gravatars](http://www.gravatar.com) (de hecho, surgen a partir de esa idea), pero basandose el los faviconos. Lo que hace el plugin es, cuando se postea un comentario, mira si la web tiene favicon, y si lo tiene, enlaza la imagen. Yo lo veo más elegante que lo de los gravatars, porque son más pequeños y no tienes que preocuparte por registrarte ni nada. Como desventajas tenemos que no todo el mundo tiene un favicon (algunos no saben ni lo que es) y que el IE (quien si no) no se lleva bien con el formato .ico, con lo que si tu favicon esta en ese formato (y es lo más normal, yo lo tengo así, sin ir más lejos) el favicon no se verá. Yo, aprovechando que este fantástico tema tiene dos css diferentes (una para navegadores normales y otra para el IE), pues le he puesto `display: none;` a las clases que controlan los favatars, asi que si estas viendo esta página con el IE (y ya me diras que motivo tienes) no verás la pijadita de los faviconos. Es una solución no demasiado elegante, pero no se me ocurre otra. Por supuesto, estoy abierto a sugerencias.

@@ -1,0 +1,29 @@
+---
+title: "Drupal: Consejos para antes (o justo despues) de empezar"
+publishedAt: "2010-03-03"
+categories: 
+  - "drupal"
+  - "legacy"
+tags: 
+  - "cck"
+  - "consejos"
+  - "empezar"
+  - "views"
+  - "zen"
+---
+
+Últimamente estoy usando mucho Drupal en el trabajo, y a base de usarlo, de equivocarme y de probar cosas, digamos que nos estamos empezando a querer...
+
+Por eso, me gustaría compartir me exigua experiencia y recomendar ciertas prácticas que considero muy importantes al iniciar un proyecto con Drupal...
+
+- Usa la versión intermedia, ni la más nueva ni la más vieja. En estos momentos, la apuesta segura sería el Drupal 6. ¿Por que? Porque así te aseguras que tendrás disponible el mayor número de módulos, más soporte de la comunidad, etc etc. Y eso, amigos, es con diferencia lo que hace el mejor a Drupal
+- La instalación por defecto debe estar en tu idioma nativo. Ya se, tu y yo lo preferimos en ingles, que es todo más corto y mas chulo. Pero créeme, establece como idioma predeterminado el castellano (o el que corresponda, vamos). Tu siempre puedes configurar la cuenta de admin para que use el ingles. Y te ahorrará muchos problemas con las URL limpias...
+- Activa el módulo de multi-idioma ([i18n](http://drupal.org/project/i18n)). Si, aunque no creas que lo vayas a usar. Si lo activas y no lo usas, no te molestará e irá almacenando las cadenas a traducir silenciosamente. Pero, ai amigo, como al final te digan 'Bueno, mejor lo haces con soporte para varios idiomas' y tengas que activarlo a toro pasado, la cosa será un infierno de apaños y chapuzas... Acuérdate de activarlo para tus tipos de contenido, y configurarlo para que por defecto asigne el idioma por defecto y esas cosas...
+- Usa el [zen](http://drupal.org/project/zen). Zen es un meta-tema, es decir, un tema que sirve como esqueleto para hacer temas nuevos. Lo tiene todo: documentación, comunidad, está bien escrito, infinidad de posibilidades... No hay excusa, vamos, **úsalo**.
+- Aprende a usar [Views](http://drupal.org/project/views) y [CCK](http://drupal.org/project/cck). Estos dos módulos te salvarán el cuello más de una vez, sobre todo si tienes que hacer algo _para ayer_ (lo habitual, vamos). Con Views podrás hacer listados de mil maneras, configurando hasta el último detalle. Y con CCK podrás crear tus propios campos para tus propios tipos de contenido. Estos dos módulos son el santo grial del desarrollo en Drupal.
+- Activa las URLs limpias cuanto antes (y todos los módulos que dependan de ellas, como path, [pathauto](http://drupal.org/project/pathauto), etc) La web quedará más bonita y a Google le gustará más. Como ves, todo son ventajas...
+- Usa los Bloques. Si puedes elegir, es mejor que no metas código directamente en las plantillas. Mejor usa los bloques, te darán mucha más flexibilidad (y son mucho más elegantes)
+
+Y para empezar, creo que ya está bien...
+
+Si algún drupalero tiene alguna sugerencia, será bienvenida, por supuesto....

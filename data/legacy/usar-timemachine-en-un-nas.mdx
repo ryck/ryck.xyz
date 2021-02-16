@@ -1,0 +1,46 @@
+---
+title: "Usar TimeMachine en un NAS"
+publishedAt: "2009-03-02"
+categories: 
+  - "apple"
+  - "legacy"
+tags: 
+  - "backup"
+  - "nas"
+  - "timemachine"
+---
+
+Por defecto, TimeMachine no permite usar nuestro NAS para guardar las copias de seguridad. Al principio tenía esa funcionalidad pero en el último momento, Apple decidió quitarla. Evidentemente, hay una forma de conseguirlo...
+
+**Ingredientes**
+
+- Un [NAS](http://es.wikipedia.org/wiki/Network-attached_storage). Y bien configurado, es decir, que se vea desde vuestra red y con los permisos necesarios
+- El nombre de vuestro equipo
+- La MAC de vuestro Mac (valga la redundancia)
+- Un _sparsebundle_. Un sparsebundle es un sistema de ficheros virtual donde el TimeMachine hace todas sus cositas
+
+Lo primero es hacer que el TimeMachine detecte las unidades de red. Para ello, tecleamos este comando en un Terminal:
+
+`defaults write com.apple.systempreferences TMShowUnsupportedNetworkVolumes 1`
+
+Ahora (igual os hace falta hacer un logout) TimeMachine verá las unidades de red pero, si intentamos usarla, dará un error. Para arreglar esto necesitamos crear un sparsebundle y copiarlo en la unidad de red que vayamos a usar con TimeMachine.
+
+El comando para crear un sparsebundle es este:
+
+`sudo hdiutil create -size **110**g -type SPARSEBUNDLE -nospotlight -volname "**BackUp**" -fs “Case-sensitive Journaled HFS+” -verbose ./**Computername_MACaddress**`
+
+**110** es el tamaño en gigas. Suele ser buena idea ponerle el mismo tamaño que el disco duro de vuestro Mac (110 en mi caso). No olvidar la g que indica que son gigas...
+
+**BackUp** es el nombre de la unidad que montara al hacer los backups. Se puede poner cualquier otro nombre, por supuesto.
+
+**Computername\_MACaddress** El nombre del sparsebundle tiene que seguir esta estructura, es decir, el nombre del equipo, guión bajo, numero MAC (todo seguido, solo los números y las letras). Algo así: RickBook\_001ec4b8f9b3 El nombre del equipo supongo que lo sabréis, y la MAC se puede obtener con este comando:
+
+`ifconfig en0 | grep ether | sed s/://g | sed s/ether//`
+
+Una vez que se haya creado el sparsebundle (tarda poco), hay que copiarlo a la unidad de red que vayamos a usar con TimeMachine.
+
+Una vez copiado, decidle a TimeMachine que haga su magia y... ¡listo!
+
+La primera vez va a tener que copiar todo, así que es recomendable hacerlo por cable y tener paciencia. Las siguientes veces será incremental y dolerá menos...
+
+Via: [TimeMachine on NAS](http://appleclinic.wordpress.com/2008/10/30/time-machine-on-nas/)

@@ -1,0 +1,43 @@
+---
+title: "Instalar aplicaciones por SSH en iPod Touch/iPhone"
+publishedAt: "2008-09-03"
+categories: 
+  - "apple"
+  - "legacy"
+tags: 
+  - "iphone"
+  - "iphone-3g"
+  - "ipod-touch"
+  - "ssh"
+---
+
+Para instalar aplicaciones en el iPod Touch/iPhone (iPhone a partir de aqui) tenemos muchas opciones, sobre todo desde la versión 2.0: Podemos tirar de AppStore, Cydia e incluso Installer (a pesar de que aun esta en beta). Pero a veces nos puede interesar instalar una aplicación por SSH...
+
+¿En que ocasiones? Pues puede ser para instalar una aplicacion que estes desarrollando tu mismo, por ejemplo, pero la verdad es que los motivos suelen ser más oscuros: instalar una app crackeada o que ya no esta en la AppStore, por ejemplo.
+
+Esto último precisamente me va a servir de ejemplo: vamos a instalar PhoneSaber, una app que simula un sable laser que ya no esta en la AppStore por problemas legales (lo de siempre, vamos)
+
+[PhoneSaber.app](http://www.megaupload.com/es/?d=IDAVCH7V)
+
+Doy por supuesto que el iPhone esta _jailbrekeado_ y con el OpenSSH instalado. En caso contrario, en [iPhoneApps](http://iphoneapps.es/) hay tutoriales para ello.
+
+La teoría es simple (bueno, y la práctica también, la verdad): Simplemente hay que subir por SFTP la aplicación (PhoneSaber.app en nuestro caso) al directorio _/Applications_ del iPhone, teniendo en cuenta que debeis modificar los permisos de la carpeta (y todo su contenido) a 0775.
+
+Vamos allá:
+
+[![](http://rick.jinlabs.com/wp-content/uploads/2008/09/install01.png "install03")](http://rick.jinlabs.com/wp-content/uploads/2008/09/install01.png)
+
+Nos conectamos por SFTP al iPhone ([WinSCP](http://winscp.net/eng/index.php) en Windows, [Cyberduck](http://cyberduck.ch/) en Mac, etc).  
+Recordar que el usuario es _root_ y la contraseña es _alpine_.
+
+[![](http://rick.jinlabs.com/wp-content/uploads/2008/09/install02.png "install03")](http://rick.jinlabs.com/wp-content/uploads/2008/09/install02.png)
+
+Nos desplazamos a _/Applications_ y copiamos (arrastrando y soltando, por ejemplo) la aplicación (PhoneSaber.app en nuestro caso)
+
+[![](http://rick.jinlabs.com/wp-content/uploads/2008/09/install03.png "install03")](http://rick.jinlabs.com/wp-content/uploads/2008/09/install03.png)
+
+Aquí podemos ajustar ya los permisos. Deben de ser **rwxrwxr-x** (0775)
+
+Listo! Ahora ya solo debemos hacer un Respring (a traves del BossPrefs) o reiniciar el iPhone para poder disfrutar de la aplicación.
+
+Por cierto, si la aplicación os la dan el formato .ipa simplemente descomprimirla y buscar dentro del directorio _Payload_...
