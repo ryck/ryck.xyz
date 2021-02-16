@@ -18,7 +18,7 @@ export default function Container(props) {
   const meta = {
     title: 'Ricardo Gonzalez – Developer.',
     description: `Front-end developer, JavaScript enthusiast, and ex-Drupal.`,
-    image: 'https://ryck.xyz/static/images/banner.png',
+    image: 'https://ryck.xyz/static/images/rick.jpg',
     type: 'website',
     ...customMeta
   };
