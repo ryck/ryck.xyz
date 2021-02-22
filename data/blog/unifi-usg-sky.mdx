@@ -1,0 +1,76 @@
+---
+title: 'How to make your USG work with Sky Broadband'
+publishedAt: '2021-02-17'
+summary: "Sky doesn't like when you use your own equipment, but there is a way around it..."
+image: '/static/images/unifi-usg-sky/modem.jpg'
+---
+
+<Image
+  alt={`Hello`}
+  src={`/static/images/unifi-usg-sky/modem.jpg`}
+  width={6016}
+  height={4000}
+  priority
+/>
+
+# How to make your USG work with Sky Broadband
+
+To use yout Unifi gear with Sky you need basically two things:
+
+1. Get a modem
+2. Configure the USG to use the modem
+
+### Get a modem
+
+The first thing you need is a modem.
+You have teo options here:
+
+- Get a [Openreach modem](https://www.amazon.co.uk/BT-Openreach-Fibre-Modem/dp/B00L4KUV1I). There are two models (Huawei HG612 and ECI B-Focus), but both work. You can get them in Amazon, Ebay, etc. and they are quite old, so you should never pay more than £30 for one.
+- Get a [Draytek Vigor 130](https://www.draytek.co.uk/products/business/vigor-130). This is a more moderm device, and unlike the Openreach ones, you will have access to all the settings. The only drawback is the price, usually is ~2x the price of a Openreach one.
+
+I have, well, all three of them, and I can not tell the difference, but some people swear you may get better results (aka, more speed) with different modems, depending on the DSLAM brand of your local fibre cabinet and stuff like that.
+
+Once you have a modem, connect it to both your (using the RJ11 cable) and your USG (LAN1), so we can proceed to the next step...
+
+### Configure the USG to use the modem
+
+Sky uses a weird protocol to provide you username and password. Previously, you would need to sniff your network traffic to find those out, but, thankfully, not anymore, and you can use anything.
+
+So, they key of all this is to add this configuration to your `config.gateway.json`
+
+```json:config.gateway.json
+{
+  "interfaces": {
+    "ethernet": {
+      "eth0": {
+        "address": ["dhcp"],
+        "dhcp-options": {
+          "client-option": [
+            "retry 60;",
+            "send dhcp-client-identifier &quot;bacons&quot;;"
+          ],
+          "default-route": "update",
+          "default-route-distance": "1",
+          "name-server": "no-update"
+        }
+      }
+    }
+  }
+}
+```
+
+Depending on what are you using to host the controller (CloudKey, Docker, etc) yout `config.gateway.json` location can change, but Ubiquiti has a very nice documentation: [UniFi - USG Advanced Configuration Using config.gateway.json](https://help.ui.com/hc/en-us/articles/215458888-UniFi-USG-Advanced-Configuration-Using-config-gateway-json)
+
+Once you have the right configuration in your `config.gateway.json`, force a reprovision and wait. Sometimes Sky takes a long time to lease you a new IP, so don't dispair and give it some time (I am talking about up tp a couple of hours)
+
+If you are lucky, your USG should tell your modem how to connect and you will be online in no time!
+
+### Troubleshooting
+
+If things are not working, check this:
+
+- Make sure you are editing the right `config.gateway.json` file.
+- Force a reprovision, just in case.
+- Reboot everything (modem + USG) and give it some time
+
+Good luck!

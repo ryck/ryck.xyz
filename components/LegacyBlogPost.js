@@ -4,10 +4,10 @@ import format from 'comma-number';
 
 import fetcher from '@/lib/fetcher';
 
-const LegacyBlogPost = ({ title, summary, slug }) => {
+const LegacyBlogPost = ({ title, summary, slug, publishedAt, excerpt }) => {
   const { data } = useSWR(`/api/views/${slug}`, fetcher);
   const views = data?.total;
-
+  console.log(excerpt);
   return (
     <Link href={`/blog/legacy/${slug}`}>
       <a className="w-full">
@@ -20,7 +20,12 @@ const LegacyBlogPost = ({ title, summary, slug }) => {
               {`${views ? format(views) : '–––'} views`}
             </p>
           </div>
-          <p className="text-gray-600 dark:text-gray-400">{summary}</p>
+          {summary && !excerpt && (
+            <p className="text-gray-600 dark:text-gray-400">{summary}</p>
+          )}
+          {excerpt && !summary && (
+            <p className="text-gray-600 dark:text-gray-400">{excerpt}</p>
+          )}
         </div>
       </a>
     </Link>
