@@ -7,7 +7,6 @@ import fetcher from '@/lib/fetcher';
 const LegacyBlogPost = ({ title, summary, slug, publishedAt, excerpt }) => {
   const { data } = useSWR(`/api/views/${slug}`, fetcher);
   const views = data?.total;
-  console.log(excerpt);
   return (
     <Link href={`/blog/legacy/${slug}`}>
       <a className="w-full">

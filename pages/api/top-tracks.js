@@ -4,9 +4,6 @@ export default async (_, res) => {
   const response = await getTopTracks();
   const { items } = await response.json();
 
-	// console.log('items', response)
-
-
 	if (items) {
 		const tracks = items.slice(0, 10).map((track) => ({
 			artist: track.artists.map((_artist) => _artist.name).join(', '),
