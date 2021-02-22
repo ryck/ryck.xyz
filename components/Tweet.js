@@ -1,7 +1,6 @@
-import Image from 'next/image';
-import { format } from 'date-fns';
 import comma from 'comma-number';
-
+import { format } from 'date-fns';
+import Image from 'next/image';
 /**
  * Supports plain text, images, quote tweets.
  *
@@ -28,10 +27,10 @@ export default function Tweet({
     referenced_tweets && referenced_tweets.find((t) => t.type === 'quoted');
 
   return (
-    <div className="rounded border border-gray-300 dark:border-gray-800 px-6 py-4 my-4 w-full">
+    <div className="w-full px-6 py-4 my-4 border border-gray-300 rounded dark:border-gray-800">
       <div className="flex items-center">
         <a
-          className="flex h-12 w-12"
+          className="flex w-12 h-12"
           href={authorUrl}
           target="_blank"
           rel="noopener noreferrer"
@@ -46,10 +45,9 @@ export default function Tweet({
         </a>
         <a
           href={authorUrl}
-          className="author"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col ml-4"
+          className="flex flex-col ml-4 author"
         >
           <span
             className="flex items-center font-bold text-gray-900 dark:text-gray-100 leading-5"
@@ -59,7 +57,7 @@ export default function Tweet({
             {author.verified ? (
               <svg
                 aria-label="Verified Account"
-                className="ml-1 text-blue-500 dark:text-white inline h-4 w-4"
+                className="inline w-4 h-4 ml-1 text-blue-500 dark:text-white"
                 viewBox="0 0 24 24"
               >
                 <g fill="currentColor">
@@ -91,11 +89,11 @@ export default function Tweet({
           </svg>
         </a>
       </div>
-      <div className="mt-4 mb-1 leading-normal whitespace-pre-wrap text-lg text-gray-700 dark:text-gray-300">
+      <div className="mt-4 mb-1 text-lg leading-normal text-gray-700 whitespace-pre-wrap dark:text-gray-300">
         {formattedText}
       </div>
       {media && media.length ? (
-        <div className="inline-grid grid-cols-2 gap-x-2 gap-y-2 my-2">
+        <div className="my-2 inline-grid grid-cols-2 gap-x-2 gap-y-2">
           {media.map((m) => (
             <Image
               key={m.media_key}
@@ -110,7 +108,7 @@ export default function Tweet({
       ) : null}
       {quoteTweet ? <Tweet {...quoteTweet} /> : null}
       <a
-        className="text-gray-500 text-sm hover:underline"
+        className="text-sm text-gray-500 hover:underline"
         href={tweetUrl}
         target="_blank"
         rel="noopener noreferrer"
@@ -122,7 +120,7 @@ export default function Tweet({
           {format(createdAt, 'h:mm a - MMM d, y')}
         </time>
       </a>
-      <div className="flex text-gray-700 dark:text-gray-300 mt-2">
+      <div className="flex mt-2 text-gray-700 dark:text-gray-300">
         <a
           className="flex items-center mr-4 text-gray-500 hover:text-blue-600 transition hover:underline"
           href={replyUrl}

@@ -1,7 +1,7 @@
 const visit = require('unist-util-visit');
 const sizeOf = require('image-size');
 
-module.exports = (options) => (tree) => {
+module.exports = () => (tree) => {
   visit(
     tree,
     // only visit p tags that contain an img element
@@ -17,7 +17,7 @@ module.exports = (options) => (tree) => {
       // Convert original node to next/image
       imageNode.type = 'html';
       imageNode.value = `<Image
-  alt={\`${imageNode.alt}\`} 
+  alt={\`${imageNode.alt}\`}
   src={\`${imageNode.url}\`}
   width={${dimensions.width}}
   height={${dimensions.height}}

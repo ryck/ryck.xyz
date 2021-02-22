@@ -23,7 +23,9 @@ const prettier = require('prettier');
                   .replace('.js', '')
                   .replace('.mdx', '');
                 const route = path === '/index' ? '' : path;
-								const legacyRoute = path.includes('legacy') ? `/blog${path}` : path
+                const legacyRoute = route.includes('legacy')
+                  ? `/blog${route}`
+                  : route;
 
                 return `
                         <url>

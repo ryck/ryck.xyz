@@ -20,11 +20,11 @@ export default function Blog({ posts }) {
       title="Blog"
       description="Thoughts on the software industry, programming, tech, videography, music, and my personal life."
     >
-      <div className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
+      <div className="flex flex-col items-start justify-center max-w-4xl mx-auto mb-16">
+        <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
           Blog
         </h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
+        <p className="mb-4 text-gray-600 dark:text-gray-400">
           {`This are my "legacy" post, recovered from my old blog. They are all in Spanish and probably broken, but hey... `}
         </p>
         <div className="relative w-full mb-4">
@@ -33,10 +33,10 @@ export default function Blog({ posts }) {
             type="text"
             onChange={(e) => setSearchValue(e.target.value)}
             placeholder="Search articles"
-            className="px-4 py-2 border border-gray-300 dark:border-gray-900 focus:ring-blue-500 focus:border-blue-500 block w-full rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+            className="block w-full px-4 py-2 text-gray-900 bg-white border border-gray-300 dark:border-gray-900 focus:ring-blue-500 focus:border-blue-500 rounded-md dark:bg-gray-800 dark:text-gray-100"
           />
           <svg
-            className="absolute right-3 top-3 h-5 w-5 text-gray-400 dark:text-gray-300"
+            className="absolute w-5 h-5 text-gray-400 right-3 top-3 dark:text-gray-300"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -50,14 +50,14 @@ export default function Blog({ posts }) {
             />
           </svg>
         </div>
-        <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-4 mt-8 text-black dark:text-white">
+        <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
           All Posts
         </h3>
-        {!filteredBlogPosts.length &&
-          <p className="text-gray-600 dark:text-gray-400 mb-4">
+        {!filteredBlogPosts.length && (
+          <p className="mb-4 text-gray-600 dark:text-gray-400">
             No posts found.
           </p>
-        }
+        )}
         {filteredBlogPosts.map((frontMatter) => (
           <LegacyBlogPost key={frontMatter.slug} {...frontMatter} />
         ))}

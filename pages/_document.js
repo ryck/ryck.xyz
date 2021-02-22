@@ -1,4 +1,4 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 class MyDocument extends Document {
   render() {
@@ -53,7 +53,7 @@ class MyDocument extends Document {
             name="google-site-verification"
           />
         </Head>
-        <body className="bg-white dark:bg-black text-white dark:text-black">
+        <body className="text-white bg-white dark:bg-black dark:text-black">
           <Main />
           <NextScript />
         </body>

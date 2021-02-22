@@ -12,6 +12,7 @@ async function generate() {
 
   const posts = await fs.readdir(path.join(__dirname, '..', 'data', 'blog'));
 
+  // eslint-disable-next-line
   await Promise.all(
     posts.map(async (name) => {
       const content = await fs.readFile(

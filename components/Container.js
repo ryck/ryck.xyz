@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-import { useTheme } from 'next-themes';
 import NextLink from 'next/link';
+import { useRouter } from 'next/router';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 import Footer from '@/components/Footer';
 
@@ -53,14 +53,14 @@ export default function Container(props) {
           <meta property="article:published_time" content={meta.date} />
         )}
       </Head>
-      <nav className="sticky-nav flex justify-between items-center max-w-5xl w-full p-8 my-0 md:my-8 mx-auto bg-white dark:bg-black bg-opacity-60">
+      <nav className="flex items-center justify-between w-full max-w-5xl p-8 mx-auto my-0 bg-white sticky-nav md:my-8 dark:bg-black bg-opacity-60">
         <a href="#skip" className="sr-only focus:not-sr-only">
           Skip to content
         </a>
         <button
           aria-label="Toggle Dark Mode"
           type="button"
-          className="rounded p-3 h-12 w-12 focus:outline-none"
+          className="w-12 h-12 p-3 rounded focus:outline-none"
           onClick={handleTheme}
           id="themeIcon"
         >
@@ -68,7 +68,7 @@ export default function Container(props) {
             <>
               {theme === 'dark' ? (
                 <svg
-                  className="w-6 h-6 fill-current text-yellow-400"
+                  className="w-6 h-6 text-yellow-400 fill-current"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +81,7 @@ export default function Container(props) {
                 </svg>
               ) : (
                 <svg
-                  className="w-6 h-6 fill-current text-black"
+                  className="w-6 h-6 text-black fill-current"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -94,19 +94,19 @@ export default function Container(props) {
         </button>
         <div>
           <NextLink href="/">
-            <a className="p-1 sm:p-4 text-gray-900 dark:text-gray-100">Home</a>
+            <a className="p-1 text-gray-900 sm:p-4 dark:text-gray-100">Home</a>
           </NextLink>
           <NextLink href="/blog">
-            <a className="p-1 sm:p-4 text-gray-900 dark:text-gray-100">Blog</a>
+            <a className="p-1 text-gray-900 sm:p-4 dark:text-gray-100">Blog</a>
           </NextLink>
           <NextLink href="/about">
-            <a className="p-1 sm:p-4 text-gray-900 dark:text-gray-100">About</a>
+            <a className="p-1 text-gray-900 sm:p-4 dark:text-gray-100">About</a>
           </NextLink>
         </div>
       </nav>
       <main
         id="skip"
-        className="flex flex-col justify-center bg-white dark:bg-black px-8"
+        className="flex flex-col justify-center px-8 bg-white dark:bg-black"
       >
         {children}
         <Footer />

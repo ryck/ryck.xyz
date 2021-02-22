@@ -1,15 +1,17 @@
 import hydrate from 'next-mdx-remote/hydrate';
 
-import { getFiles, getFileBySlug } from '@/lib/mdx';
-import LegacyBlogLayout from '@/layouts/legacyblog';
 import MDXComponents from '@/components/MDXComponents';
+import LegacyBlogLayout from '@/layouts/legacyblog';
+import { getFileBySlug, getFiles } from '@/lib/mdx';
 
 export default function Blog({ mdxSource, frontMatter }) {
   const content = hydrate(mdxSource, {
     components: MDXComponents
   });
 
-  return <LegacyBlogLayout frontMatter={frontMatter}>{content}</LegacyBlogLayout>;
+  return (
+    <LegacyBlogLayout frontMatter={frontMatter}>{content}</LegacyBlogLayout>
+  );
 }
 
 export async function getStaticPaths() {

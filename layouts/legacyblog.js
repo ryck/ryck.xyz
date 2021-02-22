@@ -1,8 +1,6 @@
-import Image from 'next/image';
-import { parseISO, format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 import Container from '@/components/Container';
-import Subscribe from '@/components/Subscribe';
 import ViewCounter from '@/components/ViewCounter';
 
 const editUrl = (slug) =>
@@ -21,26 +19,26 @@ export default function LegacyBlogLayout({ children, frontMatter }) {
       date={new Date(frontMatter.publishedAt).toISOString()}
       type="article"
     >
-      <article className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16 w-full">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
+      <article className="flex flex-col items-start justify-center w-full max-w-4xl mx-auto mb-16">
+        <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
           {frontMatter.title}
         </h1>
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full mt-2 mb-8">
+        <div className="flex flex-col items-start justify-between w-full mt-2 mb-8 md:flex-row md:items-center">
           <div className="flex items-center">
-            <p className="text-sm text-gray-700 dark:text-gray-300 ml-2">
+            <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
               {format(parseISO(frontMatter.publishedAt), 'dd/MMMM/yyyy')}
             </p>
           </div>
-          <p className="text-sm text-gray-500 min-w-32 mt-2 md:mt-0">
+          <p className="mt-2 text-sm text-gray-500 min-w-32 md:mt-0">
             {frontMatter.readingTime.text}
             {` • `}
             <ViewCounter slug={frontMatter.slug} />
           </p>
         </div>
-        <div className="prose dark:prose-dark max-w-none w-full">
+        <div className="w-full prose dark:prose-dark max-w-none">
           {children}
         </div>
-        <div className="text-sm text-gray-700 dark:text-gray-300 mt-6">
+        <div className="mt-6 text-sm text-gray-700 dark:text-gray-300">
           <a
             href={discussUrl(frontMatter.slug)}
             target="_blank"

@@ -1,6 +1,6 @@
+import format from 'comma-number';
 import { useEffect } from 'react';
 import useSWR from 'swr';
-import format from 'comma-number';
 
 import fetcher from '@/lib/fetcher';
 

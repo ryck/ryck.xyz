@@ -1,12 +1,12 @@
 export default function ProsCard({ title, pros }) {
   return (
-    <div className="border border-green-200 dark:border-green-900 bg-green-50 dark:bg-green-900 rounded p-6 my-4 w-full">
+    <div className="w-full p-6 my-4 border border-green-200 rounded dark:border-green-900 bg-green-50 dark:bg-green-900">
       <span>{`You might use ${title} if...`}</span>
       <div className="mt-4">
         {pros.map((pro) => (
-          <div key={pro} className="flex font-medium items-baseline mb-2">
-            <div className="h-4 w-4 mr-2">
-              <svg className="h-4 w-4 text-green-500" viewBox="0 0 24 24">
+          <div key={pro} className="flex items-baseline mb-2 font-medium">
+            <div className="w-4 h-4 mr-2">
+              <svg className="w-4 h-4 text-green-500" viewBox="0 0 24 24">
                 <g
                   fill="none"
                   stroke="currentColor"

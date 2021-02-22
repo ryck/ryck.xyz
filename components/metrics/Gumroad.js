@@ -1,8 +1,8 @@
-import useSWR from 'swr';
 import format from 'comma-number';
+import useSWR from 'swr';
 
-import fetcher from '@/lib/fetcher';
 import MetricCard from '@/components/metrics/Card';
+import fetcher from '@/lib/fetcher';
 
 export default function Gumroad() {
   const { data } = useSWR('/api/gumroad', fetcher);

@@ -3,7 +3,7 @@ export default async function user(req, res) {
     return res.send('Method not allowed.');
   }
 
-	const resume = {
+  const resume = {
     basics: {
       name: 'Ricardo Gonzalez',
       label: '',

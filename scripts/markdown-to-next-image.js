@@ -13,6 +13,7 @@ const imgToJsx = require('./img-to-jsx');
 
 async function getFiles(dir) {
   const subdirs = await readdir(dir);
+  // eslint-disable-next-line
   const files = await Promise.all(
     subdirs.map(async (subdir) => {
       const res = resolve(dir, subdir);
