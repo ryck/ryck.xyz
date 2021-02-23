@@ -19,7 +19,7 @@ export default function LegacyBlogLayout({ children, frontMatter }) {
       date={new Date(frontMatter.publishedAt).toISOString()}
       type="article"
     >
-      <div className="flex flex-col items-start justify-center w-full max-w-4xl mb-16">
+      <article className="flex flex-col items-start justify-center w-full max-w-4xl mb-16">
         <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
           {frontMatter.title}
         </h1>
