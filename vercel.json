@@ -10,21 +10,12 @@
           "value": "public, max-age=31536000, immutable"
         }
       ]
-    },
-    {
-      "source": "/fonts/poppins-var-latin.woff2",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
     }
   ],
   "redirects": [
     {
       "source": "/cv.pdf",
-      "destination": "/robinson-resume-2019.pdf"
+      "destination": "/CV_Ricardo_Gonzalez.pdf"
     },
     {
       "source": "/projects",
