@@ -14,13 +14,13 @@ $ yarn
 $ yarn dev
 ```
 
+Create a `.env.local` file similar to [`.env.example`](https://github.com/ryck/ryck.xyz/blob/master/.env.example).
+
 ## Roadmap
 
 - [x] ESLint + Prettier
 - [ ] PWA support
 - [ ] Layout persistence
-
-Create a `.env.local` file similar to [`.env.example`](https://github.com/ryck/ryck.xyz/blob/master/.env.example).
 
 ## Built Using
 
