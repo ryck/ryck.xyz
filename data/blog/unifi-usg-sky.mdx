@@ -23,7 +23,7 @@ To use yout Unifi gear with Sky you need basically two things:
 ### Get a modem
 
 The first thing you need is a modem.
-You have teo options here:
+You have two options here:
 
 - Get a [Openreach modem](https://www.amazon.co.uk/BT-Openreach-Fibre-Modem/dp/B00L4KUV1I). There are two models (Huawei HG612 and ECI B-Focus), but both work. You can get them in Amazon, Ebay, etc. and they are quite old, so you should never pay more than £30 for one.
 - Get a [Draytek Vigor 130](https://www.draytek.co.uk/products/business/vigor-130). This is a more moderm device, and unlike the Openreach ones, you will have access to all the settings. The only drawback is the price, usually is ~2x the price of a Openreach one.
@@ -34,7 +34,7 @@ Once you have a modem, connect it to both your (using the RJ11 cable) and your U
 
 ### Configure the USG to use the modem
 
-Sky uses a weird protocol to provide you username and password. Previously, you would need to sniff your network traffic to find those out, but, thankfully, not anymore, and you can use anything.
+Sky uses a weird protocol to provide you username and password. Previously, you would need to sniff your network traffic to find those out, but, thankfully, not anymore, and now you can use any string.
 
 So, they key of all this is to add this configuration to your `config.gateway.json`
 
@@ -59,9 +59,9 @@ So, they key of all this is to add this configuration to your `config.gateway.js
 }
 ```
 
-Depending on what are you using to host the controller (CloudKey, Docker, etc) yout `config.gateway.json` location can change, but Ubiquiti has a very nice documentation: [UniFi - USG Advanced Configuration Using config.gateway.json](https://help.ui.com/hc/en-us/articles/215458888-UniFi-USG-Advanced-Configuration-Using-config-gateway-json)
+Depending on what are you using to host the controller (CloudKey, Docker, etc) your `config.gateway.json` location can vary, but Ubiquiti has a very nice documentation: [UniFi - USG Advanced Configuration Using config.gateway.json](https://help.ui.com/hc/en-us/articles/215458888-UniFi-USG-Advanced-Configuration-Using-config-gateway-json)
 
-Once you have the right configuration in your `config.gateway.json`, force a reprovision and wait. Sometimes Sky takes a long time to lease you a new IP, so don't dispair and give it some time (I am talking about up tp a couple of hours)
+Once you have the right configuration in your `config.gateway.json`, force a reprovision and wait. Sometimes Sky takes a long time to lease you a new IP, so don't dispair and give it some time (I am talking about up otoa couple of hours)
 
 If you are lucky, your USG should tell your modem how to connect and you will be online in no time!
 
