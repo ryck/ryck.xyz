@@ -51,7 +51,6 @@ export default function Blog({ posts }) {
         </div>
         <p className="mb-2 text-gray-600 dark:text-gray-400">{`I've been writing online since 2014, mostly about web development and tech careers.
             In total, I've written ${posts.length} articles on this site.`}</p>
-        <p className="mb-4 text-gray-500 dark:text-gray-300">{`Use the search below to filter by title.`}</p>
 
         {!filteredBlogPosts.length && (
           <p className="mb-4 text-gray-600 dark:text-gray-400">
