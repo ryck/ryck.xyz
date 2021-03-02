@@ -20,7 +20,7 @@
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "dependencies": {
-    "@mapbox/rehype-prism": "0.5.0",
+    "@mapbox/rehype-prism": "0.6.0",
     "@mdx-js/loader": "1.6.22",
     "@mdx-js/react": "1.6.22",
     "@next/mdx": "^10.0.7",
@@ -28,12 +28,12 @@
     "autoprefixer": "^10.2.4",
     "big.js": "6.0.3",
     "comma-number": "2.0.1",
-    "date-fns": "^2.17.0",
+    "date-fns": "^2.18.0",
     "fathom-client": "3.0.0",
     "firebase-admin": "^9.5.0",
-    "googleapis": "^67.1.0",
+    "googleapis": "^67.1.1",
     "gray-matter": "4.0.2",
-    "ioredis": "^4.22.0",
+    "ioredis": "^4.23.0",
     "mdx-prism": "0.3.1",
     "micro-cookie-session": "^2.0.0-beta.1",
     "next": "^10.0.7",
@@ -54,8 +54,8 @@
     "unsplash-js": "^7.0.4"
   },
   "devDependencies": {
-    "eslint": "^7.20.0",
-    "eslint-config-prettier": "^8.0.0",
+    "eslint": "^7.21.0",
+    "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.3.1",
@@ -72,7 +72,7 @@
     "remark-parse": "9.0.0",
     "remark-stringify": "9.0.1",
     "rss": "1.2.2",
-    "unified": "9.2.0",
+    "unified": "9.2.1",
     "unist-util-visit": "2.0.3"
   }
 }
