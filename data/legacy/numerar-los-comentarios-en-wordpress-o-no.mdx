@@ -1,11 +1,11 @@
 ---
-title: "Numerar los comentarios en WordPress (o no)"
-publishedAt: "2008-10-17"
-categories: 
-  - "wordpress"
-  - "legacy"
-tags: 
-  - "sorteos"
+title: 'Numerar los comentarios en WordPress (o no)'
+publishedAt: '2008-10-17'
+categories:
+  - 'wordpress'
+  - 'legacy'
+tags:
+  - 'sorteos'
 ---
 
 Hablando con [CrackVan](http://blog.crackvan.net/) de los sorteos y eso (yo haré un par de ellos enseguida, por cierto) salió a debate el tema de cual sería la mejor forma de sortear algo para que no haya después rollos raros (que la gente últimamente está muy nerviosa) y creo que hemos dado con un sistema bastante robusto:
@@ -16,7 +16,7 @@ Así, al basarte en un numero aleatorio externo, te evitas problemas.
 
 Lo cual nos lleva a tener que numerar los comentarios de todos las entradas o, al menos, de las entradas que pertenezcan a una determinada categoría (Sorteos, por poner un ejemplo original). La teoría es muy fácil (bueno, y la práctica también, la verdad). Solo hay que editar la plantilla de los comentarios de nuestro tema (normalmente _comments.php_) añadiendo un contador (que inicializaremos a 1 antes de entrar en el bucle de comentarios) y luego ir aumentándolo según nuestras condiciones. Por ejemplo, yo numero todas los comentarios, pero en las entradas que pertenecen a la categoría Sorteos, los comentarios que hago yo no cuentan (para que el sistema no le asigne un número) la cosa sería tal que así:
 
-   if (in\_category(321) && $comment->user\_id != 1) { echo "#" . $nComm; $nComm++;}
+if (in_category(321) && $comment->user_id != 1) { echo "#" . $nComm; $nComm++;}
 
 Donde 321 es el ID de la categoría Sorteos y 1 el ID de mi usuario.
 

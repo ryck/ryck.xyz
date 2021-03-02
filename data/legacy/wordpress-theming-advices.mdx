@@ -1,10 +1,10 @@
 ---
-title: "WordPress Theming Advices"
-publishedAt: "2008-04-23"
-categories: 
-  - "english"
-  - "wordpress"
-  - "legacy"
+title: 'WordPress Theming Advices'
+publishedAt: '2008-04-23'
+categories:
+  - 'english'
+  - 'wordpress'
+  - 'legacy'
 ---
 
 **i18n** Always use [i18n functions](http://codex.wordpress.org/User:Nbachiyski/I18n_for_WordPress_Developers) (like _\_e()_ and _\_\_()_), even if you don't know more languages, so others can do the l10n job for you.
@@ -13,10 +13,10 @@ categories:
 
 **Alternate CSS file** In your header.php link your style.css and a alternate-style.css in order to allow users to add personal CSS code without fear to loose it in the next theme upgrade.
 
-**Supported plugins** Add support to 3rd parties plugins is good. But always check if they exists using [_function\_exists()_](http://php.net/function_exists) function to avoid PHP errors.
+**Supported plugins** Add support to 3rd parties plugins is good. But always check if they exists using [_function_exists()_](http://php.net/function_exists) function to avoid PHP errors.
 
-**Time and Date format** Don't use your own time/date format with _[the\_date()](http://codex.wordpress.org/Template_Tags/the_date)_ and _[the\_time()](http://codex.wordpress.org/Template_Tags/the_time)_ functions. Use [get\_option()](http://codex.wordpress.org/Function_Reference/get_option) function, like _the\_date(get\_option('date\_format'))_ and _the\_time(get\_option('time\_format'))_ instead. And remenber, if you call _the\_date()_ function twice or more in one page, only the first will echo the date. _the\_time()_ function don't have this behavior.
+**Time and Date format** Don't use your own time/date format with _[the_date()](http://codex.wordpress.org/Template_Tags/the_date)_ and _[the_time()](http://codex.wordpress.org/Template_Tags/the_time)_ functions. Use [get_option()](http://codex.wordpress.org/Function_Reference/get_option) function, like _the_date(get_option('date_format'))_ and _the_time(get_option('time_format'))_ instead. And remenber, if you call _the_date()_ function twice or more in one page, only the first will echo the date. _the_time()_ function don't have this behavior.
 
-**Lightweight** Use WordPress own resources if is possible: i.e. don't add jquery.js, use [_wp\_enqueue\_script()_](http://codex.wordpress.org/Function_Reference/wp_enqueue_script) function, like _wp\_enqueue\_script('jquery')_, and so on...
+**Lightweight** Use WordPress own resources if is possible: i.e. don't add jquery.js, use [_wp_enqueue_script()_](http://codex.wordpress.org/Function_Reference/wp_enqueue_script) function, like _wp_enqueue_script('jquery')_, and so on...
 
 **Widgets** Even if widgets are not your thing (like me), make your theme widget-ready. [It's so easy](http://automattic.com/code/widgets/themes/), and sooner or later someone will ask you to do it.

@@ -1,14 +1,14 @@
 ---
-title: "Soporte para etiquetas en WP 2.3"
-publishedAt: "2007-09-19"
-categories: 
-  - "blogworks"
-  - "plugins"
-  - "wordpress"
-  - "legacy"
-tags: 
-  - "tags"
-  - "wordpress"
+title: 'Soporte para etiquetas en WP 2.3'
+publishedAt: '2007-09-19'
+categories:
+  - 'blogworks'
+  - 'plugins'
+  - 'wordpress'
+  - 'legacy'
+tags:
+  - 'tags'
+  - 'wordpress'
 ---
 
 Acabo de ponerle al blog (al tema, más bien) soporte para las etiquetas o _tags_ del inminente Wordpress 2.3
@@ -17,12 +17,12 @@ Yo nunca he sido muy partidario de los plugins de etiquetas, pero ahora que vien
 
 Incluir las tags en vuestros temas es muy sencillo, sería algo así, por ejemplo:
 
-if (function\_exists('the\_tags')) { the\_tags('', ', ', ''); } else { the\_category(', '); }
+if (function_exists('the_tags')) { the_tags('', ', ', ''); } else { the_category(', '); }
 
 De esta manera, si la función está disponible (i.e. WP 2.3+) se mostraran las etiquetas, y si no, pues las categorías de toda la vida.
 
-Además, también se incluye _wp\_tag\_cloud_, que sirve para crear fácilmente esas nubes de etiquetas tan _Web 2.0_ ;-)
+Además, también se incluye _wp_tag_cloud_, que sirve para crear fácilmente esas nubes de etiquetas tan _Web 2.0_ ;-)
 
-Podéis encontrar mas info en el codex sobre [the\_tags](http://codex.wordpress.org/Template_Tags/the_tags) y [wp\_tag\_cloud](http://codex.wordpress.org/Template_Tags/wp_tag_cloud)
+Podéis encontrar mas info en el codex sobre [the_tags](http://codex.wordpress.org/Template_Tags/the_tags) y [wp_tag_cloud](http://codex.wordpress.org/Template_Tags/wp_tag_cloud)
 
-**Rant:** Con lo sencilla de usar y lo útil que resulta, es increíble que la función _function\_exists_ sea tan poco usada en los temas o plugins; con ella te aseguras, por ejemplo, que nada va a cascar con un feo error de PHP si no esta un plugin en concreto, o dar soporte a funciones especiales solo activando el plugin (si esta el plugin, haz esto, sino, haz lo de siempre), etc...
+**Rant:** Con lo sencilla de usar y lo útil que resulta, es increíble que la función _function_exists_ sea tan poco usada en los temas o plugins; con ella te aseguras, por ejemplo, que nada va a cascar con un feo error de PHP si no esta un plugin en concreto, o dar soporte a funciones especiales solo activando el plugin (si esta el plugin, haz esto, sino, haz lo de siempre), etc...

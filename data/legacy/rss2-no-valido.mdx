@@ -1,9 +1,9 @@
 ---
-title: "RSS2 No Válido"
-publishedAt: "2005-03-29"
-categories: 
-  - "blogworks"
-  - "legacy"
+title: 'RSS2 No Válido'
+publishedAt: '2005-03-29'
+categories:
+  - 'blogworks'
+  - 'legacy'
 ---
 
 Si se os acurre pasarle el [RSS Validator](http://feedvalidator.org/) al fedd RSS2 que genera el WordPress, os llevareis la desagradable sorpresa de que no valida. Esto es debido a que las fechas deben estar en formato RFC-822, y como al traducir el WordPress también se tradujeron las abreviaturas de los días, pues casca todo. Para solucionarlo hay que ir a la línea 41 de wp-rss2.php y añadir un tercer parámetro con valor 0 a la función mysql2date tal que quede asi: [código](http://blog.rick.f2o.org/mysql.phps) **Actualización:** He puesto el código en un archivo aparte, porque resulta que me machacaba los feeds...

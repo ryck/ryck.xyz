@@ -1,13 +1,13 @@
 ---
-title: "How add options to your WordPress 2.7 dashboard widgets"
-publishedAt: "2009-02-01"
-categories: 
-  - "english"
-  - "wordpress"
-  - "legacy"
-tags: 
-  - "dashboard"
-  - "widgets"
+title: 'How add options to your WordPress 2.7 dashboard widgets'
+publishedAt: '2009-02-01'
+categories:
+  - 'english'
+  - 'wordpress'
+  - 'legacy'
+tags:
+  - 'dashboard'
+  - 'widgets'
 ---
 
 Well, in this article, I assume you have read the WP Engineer's excellent post [Add WordPress Dashboard Widgets](http://wpengineer.com/add-wordpress-dashboard-widgets/), because his code will be our start point.
@@ -15,150 +15,147 @@ Well, in this article, I assume you have read the WP Engineer's excellent post [
 So, we have this code:
 
 // Load up the localization file if we're using WordPress in a different language
-// Place it in this plugin's folder and name it "MainFunction-\[value in wp-config\].mo"
-load\_plugin\_textdomain( 'MainFunction', '/wp-content/plugins/MainFunction' );
+// Place it in this plugin's folder and name it "MainFunction-\[value in wp-config].mo"
+load_plugin_textdomain( 'MainFunction', '/wp-content/plugins/MainFunction' );
 
-/\*\*
- \* Content of Dashboard-Widget
- \*/
+/\*\* \* Content of Dashboard-Widget
+\*/
 function MainFunction() {
-	echo 'Test Add Dashboard-Widget';
+echo 'Test Add Dashboard-Widget';
 }
- 
-/\*\*
- \* add Dashboard Widget via function wp\_add\_dashboard\_widget()
- \*/
-function MainFunction\_Init() {
-	wp\_add\_dashboard\_widget( 'MainFunction', \_\_( 'MainFunction Widget Title' ), 'MainFunction' );
+
+/\*\* \* add Dashboard Widget via function wp_add_dashboard_widget()
+\*/
+function MainFunction_Init() {
+wp_add_dashboard_widget( 'MainFunction', \_\_( 'MainFunction Widget Title' ), 'MainFunction' );
 }
- 
-/\*\*
- \* use hook, to integrate new widget
- \*/
-add\_action('wp\_dashboard\_setup', 'MainFunction\_Init');
 
-OK, now, remenber the wp\_add\_dashboard\_widget function?
+/\*\* \* use hook, to integrate new widget
+\*/
+add_action('wp_dashboard_setup', 'MainFunction_Init');
 
-function wp\_add\_dashboard\_widget( $widget\_id, $widget\_name, $callback, $control\_callback = null )
+OK, now, remenber the wp_add_dashboard_widget function?
 
-The $control\_callback parameter (obviously optional) is our main target. It gives the 'Configure' option to our spiffy widget. So, we need to add a 4th parameter to wp\_add\_dashboard\_widget:
+function wp_add_dashboard_widget( $widget_id, $widget_name, $callback, $control_callback = null )
 
-wp\_add\_dashboard\_widget( 'MainFunction', \_\_( 'MainFunction Widget Title' ), 'MainFunction', 'MainFunction\_Setup');
+The $control_callback parameter (obviously optional) is our main target. It gives the 'Configure' option to our spiffy widget. So, we need to add a 4th parameter to wp_add_dashboard_widget:
 
-The MainFunction\_Setup function handles two things: the options (set the default options, recolect new values, etc) and the option's presentation (i.e. the HTML part)
+wp_add_dashboard_widget( 'MainFunction', \_\_( 'MainFunction Widget Title' ), 'MainFunction', 'MainFunction_Setup');
+
+The MainFunction_Setup function handles two things: the options (set the default options, recolect new values, etc) and the option's presentation (i.e. the HTML part)
 
 So, here goes the code:
 
-function MainFunction\_Options() {
-	$defaults = array( 'items' => 5, 'boolean' => 1);
-	if ( ( !$options = get\_option( 'MainFunction' ) ) || !is\_array($options) )
-		$options = array();
-	return array\_merge( $defaults, $options );
+function MainFunction_Options() {
+$defaults = array( 'items' => 5, 'boolean' => 1);
+if ( ( !$options = get_option( 'MainFunction' ) ) || !is_array($options) )
+$options = array();
+return array_merge( $defaults, $options );
 }
 
-function MainFunction\_Setup() {
+function MainFunction_Setup() {
 
-	$options = MainFunction\_Options();
+```
+$options = MainFunction\_Options();
 
-	if ( 'post' == strtolower($\_SERVER\['REQUEST\_METHOD'\]) && isset( $\_POST\['widget\_id'\] ) && 'MainFunction' == $\_POST\['widget\_id'\] ) {
-		foreach ( array( 'items', 'boolean' ) as $key )
-				$options\[$key\] = $\_POST\[$key\];
-		update\_option( 'MainFunction', $options );
-	}
-		
+if ( 'post' == strtolower($\_SERVER\['REQUEST\_METHOD'\]) && isset( $\_POST\['widget\_id'\] ) && 'MainFunction' == $\_POST\['widget\_id'\] ) {
+	foreach ( array( 'items', 'boolean' ) as $key )
+			$options\[$key\] = $\_POST\[$key\];
+	update\_option( 'MainFunction', $options );
+}
+
+```
+
 ?>
-	
 
-		 $i";
-				?> 
-	
+    	 $i";
+    			?>
 
-   
 
-		 /> 
-	
 
- As you can see, MainFunction\_Options puts the default values (if necessary, of course) and MainFunction\_Setup show the current values and let change them. You can merge this two, of course...
+
+    	 />
+
+As you can see, MainFunction_Options puts the default values (if necessary, of course) and MainFunction_Setup show the current values and let change them. You can merge this two, of course...
 
 Now, we have to get the options and use them in our MainFunction function. Change MainFunction like that:
 
-/\*\*
- \* Content of Dashboard-Widget
- \*/
+/\*\* \* Content of Dashboard-Widget
+\*/
 function MainFunction() {
 
         $widget\_options = MainFunction\_Options();
 
-	echo 'Test Add Dashboard-Widget  
+    echo 'Test Add Dashboard-Widget
+
 ';
-	echo "You have selected $widget\_options\['items'\] items  
+echo "You have selected $widget_options\['items'] items\
 ";
-	echo "boolean is $widget\_options\['boolean'\]  
+echo "boolean is $widget_options\['boolean']\
 ";
 
 }
 
-The complete code here: 
+The complete code here:
 
- // Load up the localization file if we're using WordPress in a different language
-// Place it in this plugin's folder and name it "MainFunction-\[value in wp-config\].mo"
-load\_plugin\_textdomain( 'MainFunction', '/wp-content/plugins/MainFunction' );
+// Load up the localization file if we're using WordPress in a different language
+// Place it in this plugin's folder and name it "MainFunction-\[value in wp-config].mo"
+load_plugin_textdomain( 'MainFunction', '/wp-content/plugins/MainFunction' );
 
-/\*\*
- \* Content of Dashboard-Widget
- \*/
+/\*\* \* Content of Dashboard-Widget
+\*/
 function MainFunction() {
-        $widget\_options = MainFunction\_Options();
+$widget_options = MainFunction_Options();
 
-	echo 'Test Add Dashboard-Widget  
+    echo 'Test Add Dashboard-Widget
+
 ';
-	echo "You have selected $widget\_options\['items'\] items  
+echo "You have selected $widget_options\['items'] items\
 ";
-	echo "boolean is $widget\_options\['boolean'\]  
+echo "boolean is $widget_options\['boolean']\
 ";
 }
- 
-/\*\*
- \* add Dashboard Widget via function wp\_add\_dashboard\_widget()
- \*/
-function MainFunction\_Init() {
-	wp\_add\_dashboard\_widget( 'MainFunction', \_\_( 'MainFunction Widget Title' ), 'MainFunction' , 'MainFunction\_Setup' );
+
+/\*\* \* add Dashboard Widget via function wp_add_dashboard_widget()
+\*/
+function MainFunction_Init() {
+wp_add_dashboard_widget( 'MainFunction', \_\_( 'MainFunction Widget Title' ), 'MainFunction' , 'MainFunction_Setup' );
 }
 
-function MainFunction\_Options() {
-	$defaults = array( 'items' => 5, 'boolean' => 1);
-	if ( ( !$options = get\_option( 'MainFunction' ) ) || !is\_array($options) )
-		$options = array();
-	return array\_merge( $defaults, $options );
+function MainFunction_Options() {
+$defaults = array( 'items' => 5, 'boolean' => 1);
+if ( ( !$options = get_option( 'MainFunction' ) ) || !is_array($options) )
+$options = array();
+return array_merge( $defaults, $options );
 }
 
-function MainFunction\_Setup() {
+function MainFunction_Setup() {
 
-	$options = MainFunction\_Options();
+```
+$options = MainFunction\_Options();
 
-	if ( 'post' == strtolower($\_SERVER\['REQUEST\_METHOD'\]) && isset( $\_POST\['widget\_id'\] ) && 'MainFunction' == $\_POST\['widget\_id'\] ) {
-		foreach ( array( 'items', 'boolean' ) as $key )
-				$options\[$key\] = $\_POST\[$key\];
-		update\_option( 'MainFunction', $options );
-	}
-		
+if ( 'post' == strtolower($\_SERVER\['REQUEST\_METHOD'\]) && isset( $\_POST\['widget\_id'\] ) && 'MainFunction' == $\_POST\['widget\_id'\] ) {
+	foreach ( array( 'items', 'boolean' ) as $key )
+			$options\[$key\] = $\_POST\[$key\];
+	update\_option( 'MainFunction', $options );
+}
+
+```
+
 ?>
-	
 
-		 $i";
-				?> 
-	
+    	 $i";
+    			?>
 
-   
 
-		 /> 
-	
 
- /\*\*
- \* use hook, to integrate new widget
- \*/
-add\_action('wp\_dashboard\_setup', 'MainFunction\_Init');
 
-?> 
+    	 />
+
+/\*\* \* use hook, to integrate new widget
+\*/
+add_action('wp_dashboard_setup', 'MainFunction_Init');
+
+?>
 
 You can view a PHPS version (without PHP crippled tags) [here](http://code.jinlabs.com/MainFunction.phps).

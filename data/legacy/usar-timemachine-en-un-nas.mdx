@@ -1,13 +1,13 @@
 ---
-title: "Usar TimeMachine en un NAS"
-publishedAt: "2009-03-02"
-categories: 
-  - "apple"
-  - "legacy"
-tags: 
-  - "backup"
-  - "nas"
-  - "timemachine"
+title: 'Usar TimeMachine en un NAS'
+publishedAt: '2009-03-02'
+categories:
+  - 'apple'
+  - 'legacy'
+tags:
+  - 'backup'
+  - 'nas'
+  - 'timemachine'
 ---
 
 Por defecto, TimeMachine no permite usar nuestro NAS para guardar las copias de seguridad. Al principio tenía esa funcionalidad pero en el último momento, Apple decidió quitarla. Evidentemente, hay una forma de conseguirlo...
@@ -33,7 +33,7 @@ El comando para crear un sparsebundle es este:
 
 **BackUp** es el nombre de la unidad que montara al hacer los backups. Se puede poner cualquier otro nombre, por supuesto.
 
-**Computername\_MACaddress** El nombre del sparsebundle tiene que seguir esta estructura, es decir, el nombre del equipo, guión bajo, numero MAC (todo seguido, solo los números y las letras). Algo así: RickBook\_001ec4b8f9b3 El nombre del equipo supongo que lo sabréis, y la MAC se puede obtener con este comando:
+**Computername_MACaddress** El nombre del sparsebundle tiene que seguir esta estructura, es decir, el nombre del equipo, guión bajo, numero MAC (todo seguido, solo los números y las letras). Algo así: RickBook_001ec4b8f9b3 El nombre del equipo supongo que lo sabréis, y la MAC se puede obtener con este comando:
 
 `ifconfig en0 | grep ether | sed s/://g | sed s/ether//`
 
