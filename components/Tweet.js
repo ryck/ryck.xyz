@@ -1,33 +1,59 @@
+import Autolinker from 'autolinker';
 import comma from 'comma-number';
 import { format } from 'date-fns';
 import Image from 'next/image';
+import { parse } from 'node-html-parser';
+
 /**
  * Supports plain text, images, quote tweets.
  *
  * Needs support for images, GIFs, and replies maybe?
  */
-export default function Tweet({
-  text,
-  id,
-  author,
-  media,
-  created_at,
-  public_metrics,
-  referenced_tweets
-}) {
+export default function Tweet(props) {
+  const {
+    full_text,
+    id,
+    created_at,
+    retweet_count,
+    favorite_count,
+    referenced_tweets,
+    entities,
+    coordinates,
+    source
+  } = props;
+
+  const author = {
+    username: 'ryck',
+    profile_image_url:
+      'https://pbs.twimg.com/profile_images/458896478476328960/3z7N1TRP_400x400.jpeg'
+  };
   const authorUrl = `https://twitter.com/${author.username}`;
   const likeUrl = `https://twitter.com/intent/like?tweet_id=${id}`;
   const retweetUrl = `https://twitter.com/intent/retweet?tweet_id=${id}`;
-  const replyUrl = `https://twitter.com/intent/tweet?in_reply_to=${id}`;
+  // const replyUrl = `https://twitter.com/intent/tweet?in_reply_to=${id}`;
   const tweetUrl = `https://twitter.com/${author.username}/status/${id}`;
   const createdAt = new Date(created_at);
 
-  const formattedText = text.replace(/https:\/\/[\n\S]+/g, '');
+  const formattedText =
+    full_text &&
+    Autolinker.link(full_text, {
+      mention: 'twitter',
+      hashtag: 'twitter',
+      className: 'tweet'
+    });
   const quoteTweet =
     referenced_tweets && referenced_tweets.find((t) => t.type === 'quoted');
 
+  const parsedSource = parse(source);
+  const sourceLink = source && parsedSource.querySelector('a');
+  const sourceText = source && sourceLink.rawText;
+  const sourceHref = source && sourceLink.attributes;
+
   return (
-    <div className="w-full px-6 py-4 my-4 border border-gray-300 rounded dark:border-gray-800">
+    <div
+      className="w-full min-w-full px-6 py-4 my-4 border border-gray-300 rounded dark:border-gray-800"
+      id={id}
+    >
       <div className="flex items-center">
         <a
           className="flex w-12 h-12"
@@ -72,7 +98,7 @@ export default function Tweet({
         </a>
         <a
           className="ml-auto"
-          href={authorUrl}
+          href={tweetUrl}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -89,18 +115,21 @@ export default function Tweet({
           </svg>
         </a>
       </div>
-      <div className="mt-4 mb-1 text-lg leading-normal text-gray-700 whitespace-pre-wrap dark:text-gray-300">
-        {formattedText}
-      </div>
-      {media && media.length ? (
-        <div className="my-2 inline-grid grid-cols-2 gap-x-2 gap-y-2">
-          {media.map((m) => (
+      <div
+        className="mt-4 mb-1 text-lg leading-normal text-gray-700 whitespace-pre-wrap dark:text-gray-300"
+        dangerouslySetInnerHTML={{
+          __html: formattedText
+        }}
+      ></div>
+      {entities && entities.media && entities.media.length ? (
+        <div className="my-2">
+          {entities.media.map((m) => (
             <Image
-              key={m.media_key}
-              alt={text}
-              height={m.height}
-              width={m.width}
-              src={m.url}
+              key={m.id}
+              alt={full_text}
+              height={m.sizes.large.h}
+              width={m.sizes.large.w}
+              src={m.media_url_https}
               className="rounded"
             />
           ))}
@@ -108,7 +137,7 @@ export default function Tweet({
       ) : null}
       {quoteTweet ? <Tweet {...quoteTweet} /> : null}
       <a
-        className="text-sm text-gray-500 hover:underline"
+        className="mr-2 text-sm text-gray-500"
         href={tweetUrl}
         target="_blank"
         rel="noopener noreferrer"
@@ -117,52 +146,96 @@ export default function Tweet({
           title={`Time Posted: ${createdAt.toUTCString()}`}
           dateTime={createdAt.toISOString()}
         >
-          {format(createdAt, 'h:mm a - MMM d, y')}
+          {format(createdAt, 'H:mm - d/MM/y')}
         </time>
       </a>
+      {source && sourceText && sourceHref && (
+        <>
+          ·
+          <a
+            className="ml-2 text-sm text-gray-500"
+            href={sourceHref.href || `#`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {sourceText || ''}
+          </a>
+        </>
+      )}
       <div className="flex mt-2 text-gray-700 dark:text-gray-300">
         <a
-          className="flex items-center mr-4 text-gray-500 hover:text-blue-600 transition hover:underline"
-          href={replyUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg className="mr-2" width="24" height="24" viewBox="0 0 24 24">
-            <path
-              className="fill-current"
-              d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.045.286.12.403.143.225.385.347.633.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.368-3.43-7.788-7.8-7.79zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.334-.75-.75-.75h-.395c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z"
-            />
-          </svg>
-          <span>{comma(public_metrics.reply_count)}</span>
-        </a>
-        <a
-          className="flex items-center mr-4 text-gray-500 hover:text-green-600 transition hover:underline"
+          className="flex items-center mr-4 text-gray-500 hover:text-green-600 transition duration-300"
           href={retweetUrl}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <svg className="mr-2" width="24" height="24" viewBox="0 0 24 24">
+          <svg
+            className="w-6 h-6 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
-              className="fill-current"
-              d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
             />
           </svg>
-          <span>{comma(public_metrics.retweet_count)}</span>
+          <span>{comma(retweet_count)}</span>
         </a>
         <a
-          className="flex items-center text-gray-500 hover:text-red-600 transition hover:underline"
+          className="flex items-center mr-4 text-gray-500 hover:text-red-600 transition duration-300"
           href={likeUrl}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <svg className="mr-2" width="24" height="24" viewBox="0 0 24 24">
+          <svg
+            className="w-6 h-6 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
-              className="fill-current"
-              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
             />
           </svg>
-          <span>{comma(public_metrics.like_count)}</span>
+          <span>{comma(favorite_count)}</span>
         </a>
+        {coordinates && coordinates.coordinates && (
+          <a
+            className="flex items-center text-gray-500 hover:text-red-600 transition duration-300"
+            href={`https://www.google.com/maps/search/?api=1&query=${coordinates.coordinates[1]},${coordinates.coordinates[0]}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg
+              className="w-6 h-6 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+            </svg>
+          </a>
+        )}
       </div>
     </div>
   );

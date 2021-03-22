@@ -156,3 +156,22 @@ input[type='email'] {
   transition-property: transform;
   transform: rotate(720deg);
 }
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .tweet-url {
+    @apply hover:underline;
+  }
+
+  .tweet {
+    @apply text-blue-500;
+  }
+}
