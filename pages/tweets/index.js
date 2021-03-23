@@ -46,17 +46,22 @@ export default function Tweets() {
                   <Link href={`/tweets/${year}`}>
                     <a className="text-2xl font-bold">{year}</a>
                   </Link>
-                  <div className="mt-4 grid grid-cols-12">
-                    {months.map((month) => (
-                      <Link
-                        href={`/tweets/${year}/${month}`}
-                        key={`${month}.${year}`}
-                      >
-                        <a className="text-xl">
-                          {format(new Date(year, month - 1, 1), 'LLL')}
-                        </a>
-                      </Link>
-                    ))}
+                  <div className="mt-2 grid grid-cols-6 md:grid-cols-12">
+                    {months.map((month) => {
+                      if (year == 2007 && month < 2) return null;
+                      if (year == 2021 && month > 2) return null;
+
+                      return (
+                        <Link
+                          href={`/tweets/${year}/${month}`}
+                          key={`${month}.${year}`}
+                        >
+                          <a className="text-xl">
+                            {format(new Date(year, month - 1, 1), 'LLL')}
+                          </a>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </article>
               ))}
