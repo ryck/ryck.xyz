@@ -59,20 +59,30 @@ export default function Tweets({ data }) {
 }
 
 export async function getStaticPaths() {
-  const years = tweets.map((t) => {
-    return getYear(new Date(t.created_at));
+  const years = [
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021
+  ];
+
+  const paths = years.map((year) => {
+    return { params: { year: year.toString() } };
   });
 
-  const uniqueYears = years
-    .filter((x, i, a) => a.indexOf(x) == i)
-    .map((y) => {
-      return { params: { year: y.toString() } };
-    });
-
-  // console.log(uniqueYears);
-
   return {
-    paths: uniqueYears,
+    paths,
     fallback: false // See the "fallback" section below
   };
 }

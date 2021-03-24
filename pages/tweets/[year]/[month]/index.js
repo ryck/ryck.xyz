@@ -48,26 +48,47 @@ export default function Tweets({ data }) {
   );
 }
 
-// export async function getStaticPaths() {
-//   const years = tweets.map((t) => {
-//     return getYear(new Date(t.created_at));
-//   });
+export async function getStaticPaths() {
+  const years = [
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021
+  ];
 
-//   const uniqueYears = years
-//     .filter((x, i, a) => a.indexOf(x) == i)
-//     .map((y) => {
-//       return { params: { year: y.toString() } };
-//     });
+  const months = Array.from(Array(12).keys(), (n) => n + 1);
 
-//   console.log(uniqueYears);
+  const paths = years
+    .map((year) =>
+      months.map((month) => {
+        if (year == 2007 && month < 2) return;
+        if (year == 2021 && month > 2) return;
+        return {
+          params: { year: year.toString(), month: month.toString() }
+        };
+      })
+    )
+    .flat()
+    .filter(Boolean);
 
-//   return {
-//     paths: uniqueYears,
-//     fallback: false // See the "fallback" section below
-//   };
-// }
+  return {
+    paths,
+    fallback: false // See the "fallback" section below
+  };
+}
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
   const filteredTweets = tweets.filter(
     (t) =>
       getYear(new Date(t.created_at)) == params.year &&

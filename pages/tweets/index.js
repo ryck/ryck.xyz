@@ -56,7 +56,7 @@ export default function Tweets() {
                           href={`/tweets/${year}/${month}`}
                           key={`${month}.${year}`}
                         >
-                          <a className="text-xl">
+                          <a className="py-4 text-xl">
                             {format(new Date(year, month - 1, 1), 'LLL')}
                           </a>
                         </Link>
