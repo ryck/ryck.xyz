@@ -13,8 +13,6 @@ export default function Tweets({ data }) {
       (a, b) => Number(new Date(a.created_at)) - Number(new Date(b.created_at))
     );
 
-  console.log(sortedTweets);
-  console.log(size(filter(sortedTweets, { favorited: true })) | 0);
   return (
     <Container title="Tweets">
       <div className="flex flex-col items-start justify-center max-w-4xl mx-auto mb-16">
