@@ -1,12 +1,13 @@
 import { getYear } from 'date-fns';
 import { filter, size } from 'lodash';
+import Link from 'next/link';
 
 import Container from '@/components/Container';
 import MetricCard from '@/components/metrics/Card';
 import Tweet from '@/components/Tweet';
 import { tweets } from '@/data/tweets.js';
 
-export default function Tweets({ data }) {
+export default function Tweets({ data, year }) {
   const sortedTweets = data
     // .slice(0, 200)
     .sort(
@@ -16,9 +17,28 @@ export default function Tweets({ data }) {
   return (
     <Container title="Tweets">
       <div className="flex flex-col items-start justify-center max-w-4xl mx-auto mb-16">
-        <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
-          Tweets
-        </h1>
+        <nav className="my-8 font-bold text-black" aria-label="Breadcrumb">
+          <ol className="inline-flex p-0 list-none">
+            <li className="flex items-center">
+              <Link href={`/tweets/`}>
+                <a className="">Tweets</a>
+              </Link>
+              <svg
+                className="w-3 h-3 mx-3 fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+              >
+                <path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+              </svg>
+            </li>
+            <li className="flex items-center">
+              <a className="text-gray-500" aria-current="page">
+                {year}
+              </a>
+            </li>
+          </ol>
+        </nav>
+
         <aside className="w-full grid grid-cols-3 gap-4">
           <MetricCard
             header="Tweets"
@@ -92,5 +112,5 @@ export async function getStaticProps({ params }) {
     (t) => getYear(new Date(t.created_at)) == params.year
   );
 
-  return { props: { data: filteredTweets } };
+  return { props: { data: filteredTweets, year: params.year } };
 }
