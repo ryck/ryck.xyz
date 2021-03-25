@@ -51,7 +51,7 @@ export default function Tweet(props) {
 
   return (
     <div
-      className="w-full min-w-full px-6 py-4 my-4 border border-gray-300 rounded dark:border-gray-800"
+      className="w-full px-6 py-4 my-4 border border-gray-300 rounded dark:border-gray-800"
       id={id}
     >
       <div className="flex items-center">

@@ -51,23 +51,25 @@ export default function Tweets({ data, year, month }) {
           </ol>
         </nav>
 
-        <aside className="w-full grid grid-cols-3 gap-4">
-          <MetricCard
-            header="Tweets"
-            link={`https://twitter.com/ryck`}
-            metric={sortedTweets.length}
-          />
-          <MetricCard
-            header="Retweeted"
-            link={`https://twitter.com/ryck`}
-            metric={size(filter(sortedTweets, { retweeted: true })) | 0}
-          />
-          <MetricCard
-            header="Favorited"
-            link={`https://twitter.com/ryck`}
-            metric={size(filter(sortedTweets, { favorited: true })) | 0}
-          />
-        </aside>
+        {sortedTweets.length != 0 && (
+          <aside className="w-full grid grid-cols-3 gap-4">
+            <MetricCard
+              header="Tweets"
+              link={`https://twitter.com/ryck`}
+              metric={sortedTweets.length}
+            />
+            <MetricCard
+              header="Retweeted"
+              link={`https://twitter.com/ryck`}
+              metric={size(filter(sortedTweets, { retweeted: true })) | 0}
+            />
+            <MetricCard
+              header="Favorited"
+              link={`https://twitter.com/ryck`}
+              metric={size(filter(sortedTweets, { favorited: true })) | 0}
+            />
+          </aside>
+        )}
         <div className="mb-8 text-gray-600 max-w-none leading-6 dark:text-gray-400">
           {sortedTweets &&
             sortedTweets.map((tweet) => <Tweet key={tweet.id} {...tweet} />)}

@@ -1,4 +1,4 @@
-import { getYear } from 'date-fns';
+import { format, getYear } from 'date-fns';
 import { filter, size } from 'lodash';
 import Link from 'next/link';
 
@@ -14,10 +14,15 @@ export default function Tweets({ data, year }) {
       (a, b) => Number(new Date(a.created_at)) - Number(new Date(b.created_at))
     );
 
+  const months = Array.from(Array(12).keys(), (n) => n + 1);
+
   return (
     <Container title="Tweets">
       <div className="flex flex-col items-start justify-center max-w-4xl mx-auto mb-16">
-        <nav className="my-8 font-bold text-black" aria-label="Breadcrumb">
+        <nav
+          className="font-bold text-black dark:text-gray-300"
+          aria-label="Breadcrumb"
+        >
           <ol className="inline-flex p-0 list-none">
             <li className="flex items-center">
               <Link href={`/tweets/`}>
@@ -38,7 +43,17 @@ export default function Tweets({ data, year }) {
             </li>
           </ol>
         </nav>
-
+        <div className="flex justify-between w-full mt-2 text-gray-700 whitespace-pre-wrap dark:text-gray-300">
+          {months.map((m) => {
+            return (
+              <Link href={`/tweets/${year}/${m}`} key={`${m}.${year}`}>
+                <a className="py-4 text-xl text-center">
+                  {format(new Date(year, m - 1, 1), 'LLL')}
+                </a>
+              </Link>
+            );
+          })}
+        </div>
         <aside className="w-full grid grid-cols-3 gap-4">
           <MetricCard
             header="Tweets"
