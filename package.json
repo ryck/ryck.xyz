@@ -71,6 +71,7 @@
     "eslint-plugin-tailwind": "^0.2.1",
     "globby": "11.0.2",
     "image-size": "^0.9.4",
+    "next-secure-headers": "^2.2.0",
     "node-html-parser": "^3.0.4",
     "prettier": "^2.2.1",
     "rehype": "11.0.0",
