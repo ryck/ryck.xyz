@@ -1,4 +1,13 @@
+const { createSecureHeaders } = require('next-secure-headers');
+
 module.exports = {
+  async headers() {
+    return [{ source: '/(.*)', headers: createSecureHeaders() }];
+  },
+  future: {
+    webpack5: true,
+    strictPostcssConfiguration: true
+  },
   images: {
     domains: [
       'i.scdn.co', // Spotify Album Art
