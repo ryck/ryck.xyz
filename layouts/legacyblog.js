@@ -35,7 +35,7 @@ export default function LegacyBlogLayout({ children, frontMatter }) {
             <ViewCounter slug={frontMatter.slug} />
           </p>
         </div>
-        <div className="w-full prose dark:prose-dark max-w-none">
+        <div className="w-full prose prose-xl dark:prose-dark max-w-none">
           {children}
         </div>
         <div className="mt-6 text-sm text-gray-700 dark:text-gray-300">
