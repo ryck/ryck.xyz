@@ -17,7 +17,9 @@ Yo nunca he sido muy partidario de los plugins de etiquetas, pero ahora que vien
 
 Incluir las tags en vuestros temas es muy sencillo, sería algo así, por ejemplo:
 
+```php
 if (function_exists('the_tags')) { the_tags('', ', ', ''); } else { the_category(', '); }
+```
 
 De esta manera, si la función está disponible (i.e. WP 2.3+) se mostraran las etiquetas, y si no, pues las categorías de toda la vida.
 

@@ -17,7 +17,7 @@ Como habréis notado, el [Gmail Notifier](https://addons.mozilla.org/en-US/firef
 Método manual:
 
 - Cerrar el Firefox
-- Ir a _%APPDATA%_/Mozilla\Firefox\Profiles\\_profile_\\{44d0a1b4-9c90-4f86-ac92-8680b5d6549e}\components
+- Ir a `_%APPDATA%_/Mozilla\Firefox\Profiles\\_profile_\\{44d0a1b4-9c90-4f86-ac92-8680b5d6549e}\components`
 - Editar el archivo _nsGMNotifierService.js_
 - Buscar todas las coincidencias de _\&start=0\&init=1_ (debería haber 3) y añadirle al final \&ui=1 (al final, pero dentro de las comillas, claro)
 - Reiniciar el Firefox y disfrutar de la extensión otra vez
@@ -25,7 +25,7 @@ Método manual:
 Método _vagomático_ (mi preferido):
 
 - Cerrar el Firefox
-- Ir a _%APPDATA%_/Mozilla\Firefox\Profiles\\_profile_\\{44d0a1b4-9c90-4f86-ac92-8680b5d6549e}\components
+- Ir a `_%APPDATA%_/Mozilla\Firefox\Profiles\\_profile_\\{44d0a1b4-9c90-4f86-ac92-8680b5d6549e}\components`
 - Renombrar nsGMNotifierService.js (para tener una copia original por si acaso)
 - Poner [nsGMNotifierService.js modificado](http://johakaik.googlepages.com/nsGMNotifierService.js.NEW.zip) en la carpeta antes mencionada.
 - Reiniciar Firefox, etc...

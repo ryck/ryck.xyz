@@ -22,7 +22,6 @@ export default function Blog({ code, frontMatter }) {
 export async function getStaticPaths() {
   const posts = await getFiles('blog');
 
-  console.log('getStaticPaths', posts);
   return {
     paths: posts.map((p) => ({
       params: {
@@ -35,6 +34,5 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const post = await getFileBySlug('blog', params.slug);
-  console.log('getStaticProps', post);
   return { props: { ...post } };
 }
