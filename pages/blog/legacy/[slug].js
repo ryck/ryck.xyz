@@ -1,16 +1,17 @@
-import hydrate from 'next-mdx-remote/hydrate';
+import { getMDXComponent } from 'mdx-bundler/client';
+import { useMemo } from 'react';
 
-import MDXComponents from '@/components/MDXComponents';
+import components from '@/components/MDXComponents';
 import LegacyBlogLayout from '@/layouts/legacyblog';
 import { getFileBySlug, getFiles } from '@/lib/mdx';
 
-export default function Blog({ mdxSource, frontMatter }) {
-  const content = hydrate(mdxSource, {
-    components: MDXComponents
-  });
+export default function Blog({ code, frontMatter }) {
+  const Component = useMemo(() => getMDXComponent(code), [code]);
 
   return (
-    <LegacyBlogLayout frontMatter={frontMatter}>{content}</LegacyBlogLayout>
+    <LegacyBlogLayout frontMatter={frontMatter}>
+      <Component components={{ ...components }} />
+    </LegacyBlogLayout>
   );
 }
 

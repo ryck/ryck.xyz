@@ -1,14 +1,7 @@
 import { format as format_fns, parseISO } from 'date-fns';
 import Link from 'next/link';
 
-const BlogPost = ({
-  title,
-  summary,
-  slug,
-  publishedAt,
-  excerpt,
-  legacy = false
-}) => {
+const BlogPost = ({ title, summary, slug, publishedAt, legacy = false }) => {
   const date = publishedAt
     ? format_fns(parseISO(publishedAt), 'dd/MM/yyyy')
     : null;
@@ -25,12 +18,9 @@ const BlogPost = ({
             </h4>
           </div>
           <p className="flex mb-2 text-sm text-gray-500">{date}</p>
-          {summary && !excerpt && (
+          {summary && (
             <p className="mb-4 text-gray-600 dark:text-gray-400">{summary}</p>
           )}
-          {excerpt && !summary && (
-            <p className="mb-4 text-gray-600 dark:text-gray-400">{excerpt}</p>
-          )}{' '}
         </div>
       </a>
     </Link>

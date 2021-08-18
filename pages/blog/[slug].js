@@ -1,20 +1,28 @@
-import hydrate from 'next-mdx-remote/hydrate';
+import { getMDXComponent } from 'mdx-bundler/client';
+import { useMemo } from 'react';
 
-import MDXComponents from '@/components/MDXComponents';
+import components from '@/components/MDXComponents';
 import BlogLayout from '@/layouts/blog';
 import { getFileBySlug, getFiles } from '@/lib/mdx';
 
-export default function Blog({ mdxSource, frontMatter }) {
-  const content = hydrate(mdxSource, {
-    components: MDXComponents
-  });
+export default function Blog({ code, frontMatter }) {
+  const Component = useMemo(() => getMDXComponent(code), [code]);
 
-  return <BlogLayout frontMatter={frontMatter}>{content}</BlogLayout>;
+  return (
+    <BlogLayout frontMatter={frontMatter}>
+      <Component
+        components={{
+          ...components
+        }}
+      />
+    </BlogLayout>
+  );
 }
 
 export async function getStaticPaths() {
   const posts = await getFiles('blog');
 
+  console.log('getStaticPaths', posts);
   return {
     paths: posts.map((p) => ({
       params: {
@@ -27,6 +35,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const post = await getFileBySlug('blog', params.slug);
-
-  return { props: post };
+  console.log('getStaticProps', post);
+  return { props: { ...post } };
 }

@@ -1,7 +1,7 @@
 import { format as format_fns, parseISO } from 'date-fns';
 import Link from 'next/link';
 
-const LegacyBlogPost = ({ title, summary, slug, excerpt, publishedAt }) => {
+const LegacyBlogPost = ({ title, summary, slug, publishedAt }) => {
   const date = publishedAt
     ? format_fns(parseISO(publishedAt), 'dd/MM/yyyy')
     : null;
@@ -17,11 +17,8 @@ const LegacyBlogPost = ({ title, summary, slug, excerpt, publishedAt }) => {
               {date}
             </p>
           </div>
-          {summary && !excerpt && (
+          {summary && (
             <p className="mb-4 text-gray-600 dark:text-gray-400">{summary}</p>
-          )}
-          {excerpt && !summary && (
-            <p className="mb-4 text-gray-600 dark:text-gray-400">{excerpt}</p>
           )}
         </div>
       </a>

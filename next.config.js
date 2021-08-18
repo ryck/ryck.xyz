@@ -1,9 +1,7 @@
 module.exports = {
   poweredByHeader: false,
-  future: {
-    webpack5: true,
-    strictPostcssConfiguration: true
-  },
+  experimental: { esmExternals: true },
+  reactStrictMode: true,
   images: {
     domains: [
       'i.scdn.co', // Spotify Album Art
@@ -11,11 +9,11 @@ module.exports = {
     ]
   },
   target: 'serverless',
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      require('./scripts/generate-sitemap');
-      require('./scripts/generate-rss');
-    }
+  webpack: (config) => {
+    // if (isServer) {
+    //   require('./scripts/generate-sitemap.mjs');
+    //   require('./scripts/generate-rss');
+    // }
 
     // Replace React with Preact only in client production build
     // if (!dev && !isServer) {
